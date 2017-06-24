@@ -1,6 +1,70 @@
+.MenuTop {
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2em;
+  padding-top: 0em;
+  background: #17b8db; }
+
+.MenuTop img {
+  width: 5em;
+  cursor: pointer; }
+
+.Zoom {
+  display: flex;
+  flex-direction: row; }
+
+.MenuLeft {
+  width: 20%;
+  background: #dddddd;
+  height: 100%;
+  padding: 1em; }
+
+.MenuRight {
+  background: #dddddd;
+  height: 100%;
+  padding: 1em; }
+
+.Arrows img {
+  width: 4em;
+  margin: 0.2em;
+  cursor: pointer; }
+
+.Arrows {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.DownArrows {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center; }
+
+.Toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; }
+
+.Toolbar img {
+  width: 6em;
+  padding: 1em;
+  cursor: pointer; }
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif; }
+
+.Container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%; }
 
 /*# sourceMappingURL=index.css.map */

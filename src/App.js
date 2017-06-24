@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import CodeFest             from "./components/CodeFest/CodeFest"
+import MenuTop             from "./components/organisms/MenuTop"
+import MenuLeft             from "./components/organisms/MenuLeft"
+import MenuRight             from "./components/organisms/MenuRight"
 
-import './App.css';
+import './style/index.css';
 
 class App extends Component {
   constructor(props){
@@ -18,7 +20,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <CodeFest />
+        <MenuTop />
+        <div className="Container">
+          <MenuLeft />
+          <MenuRight />
+        </div>
       </div>
     );
   }

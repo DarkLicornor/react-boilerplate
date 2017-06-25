@@ -15,7 +15,7 @@ class MenuLeft extends Component {
 
   render() {
     return (
-      <div className="MenuLeft">
+      <div id="MenuLeft">
         <h1>Titre</h1>
         <h2>SousTitre</h2>
       </div>

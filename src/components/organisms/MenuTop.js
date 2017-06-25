@@ -38,7 +38,7 @@ class MenuTop extends Component {
 
   render() {
     return (
-      <div className="MenuTop">
+      <div id="MenuTop">
         <img onClick={this.props.showParameters} src={settings} alt="Paramètres (touche échape)"/>
         {this.state.voice
           ? <img onClick={this.toggleVoice} src={play} alt="Lancer la voie de synthèse (touche espace)"/>

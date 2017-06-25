@@ -150,7 +150,7 @@ class Document extends Component {
 
             finalHtml += "<"+name
             if(context.state.selected === i && name !== "ul" && name !== "ol" ){
-              finalHtml += ' style="color: red" '
+              finalHtml += " id='selected'"
               context.typeSelected = name
             }
             finalHtml += ">"

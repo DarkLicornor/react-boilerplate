@@ -12,6 +12,7 @@ class Document extends Component {
     this.initElements()
     this.maxElements = 0
     this.selectedText = ""
+    this.synth = ""
     this.state = {
       loading: true,
       json: jsonPage,
@@ -26,24 +27,26 @@ class Document extends Component {
   }
 
   getSelectedVoice(){
+    console.log("InGEtSelectedVoice", this.props.selectedVoice)
     let voices = []
+    voices = this.synth.getVoices();
+    let result = ""
     var selectedOption = this.props.selectedVoice;
     for(let i = 0; i < voices.length ; i++) {
       if(voices[i].name === selectedOption) {
-      console.log(voices[i])
-        return voices[i];
+        result = voices[i]
       }
     }
+    return result;
   }
 
   speak(){
-    var synth = window.speechSynthesis
     var utterThis = new SpeechSynthesisUtterance(this.selectedText);
 
     utterThis.voice = this.getSelectedVoice()
     utterThis.pitch = 1
     utterThis.rate = 1
-    synth.speak(utterThis)
+    this.synth.speak(utterThis)
 
     utterThis.onpause = function(event) {
      var char = event.utterance.text.charAt(event.charIndex);
@@ -55,6 +58,7 @@ class Document extends Component {
   componentDidMount(){
     //Set all the key listenners
     let context = this
+    this.synth = window.speechSynthesis
 
     Mousetrap.bind('right', () => {
       if(context.state.selected+1 > 0){

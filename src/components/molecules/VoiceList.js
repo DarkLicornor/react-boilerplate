@@ -29,6 +29,7 @@ class SizeList extends Component {
 
       option.setAttribute('data-lang', voices[i].lang)
       option.setAttribute('data-name', voices[i].name)
+      option.setAttribute('value', voices[i].name)
       voiceSelect.appendChild(option);
     }
     voiceSelect.selectedIndex = selectedIndex;

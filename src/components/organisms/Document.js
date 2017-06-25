@@ -22,54 +22,63 @@ class Document extends Component {
   }
 
   getSelectedText(){
-    console.log("inZeFunction", this)
     return this.selectedText
   }
 
+  getSelectedVoice(){
+    let voices = []
+    var selectedOption = this.props.selectedVoice;
+    for(let i = 0; i < voices.length ; i++) {
+      if(voices[i].name === selectedOption) {
+      console.log(voices[i])
+        return voices[i];
+      }
+    }
+  }
+
+  speak(){
+    var synth = window.speechSynthesis
+    var utterThis = new SpeechSynthesisUtterance(this.selectedText);
+
+    utterThis.voice = this.getSelectedVoice()
+    utterThis.pitch = 1
+    utterThis.rate = 1
+    synth.speak(utterThis)
+
+    utterThis.onpause = function(event) {
+     var char = event.utterance.text.charAt(event.charIndex);
+     console.log('Speech paused at character ' + event.charIndex + ' of "' +
+     event.utterance.text + '", which is "' + char + '".');
+    }
+  }
+
   componentDidMount(){
-
-
-
     //Set all the key listenners
     let context = this
-    var synth = window.speechSynthesis
-    window.speechSynthesis.onvoiceschanged = function() {
-      context.voices = window.speechSynthesis.getVoices();
-    };
 
-    Mousetrap.bind('right', () => { context.setState({selected: context.state.selected + 1}); console.log(context.state.selected) })
-    Mousetrap.bind('up', () => { context.setState({selected: context.state.selected - 1}); console.log(context.state.selected) })
-    Mousetrap.bind('a', () => {
-      //Setup the variables
-      // var inputForm = document.querySelector('form')
-      // var inputTxt = document.querySelector('.txt')
-      // var voiceSelect = document.querySelector('select')
-
-      var utterThis = new SpeechSynthesisUtterance(context.selectedText);
-      console.log("text", context.getSelectedText())
-
-      utterThis.voice = context.voices[6]
-      utterThis.pitch = 1
-      utterThis.rate = 1
-      synth.speak(utterThis)
-
-      utterThis.onpause = function(event) {
-       var char = event.utterance.text.charAt(event.charIndex);
-       console.log('Speech paused at character ' + event.charIndex + ' of "' +
-       event.utterance.text + '", which is "' + char + '".');
+    Mousetrap.bind('right', () => {
+      if(context.state.selected+1 > 0){
+        context.setState({selected: context.state.selected + 1})
       }
-
+    })
+    Mousetrap.bind('up', () => {
+      if(context.state.selected-1 > 0){
+        context.setState({selected: context.state.selected - 1})
+      }
+    })
+    Mousetrap.bind('a', () => {
+      context.speak()
     })
 
     Mousetrap.bind('down', () => {
-      let currentSelected = this.maxElements
+      let currentSelected = context.maxElements
       let priorityOrder = ["h1", "h2", "h3", "h4", "h5", "p", "li"]
       //On cherche la balise equivalente ou au dessus en priorite
       //On parcours les balises avec un plus grande priorite
       for(let i=priorityOrder.indexOf(context.typeSelected); i > 0 ;i--){
         //On parcours les elements de la liste pour trouver le prochain
         let found = false
-        for(let j=0;j<this.elements[priorityOrder[i]].length;j++){
+        for(let j=0;j<context.elements[priorityOrder[i]].length;j++){
           //On compare si il est plus proche que la balise trouvee precedement
           let currentElement = context.elements[priorityOrder[i]][j]
           if(currentElement > context.state.selected && found === false){
@@ -80,7 +89,9 @@ class Document extends Component {
           }
         }
       }
-      this.setState({selected: currentSelected})
+      if(currentSelected < context.maxElements){
+        this.setState({selected: currentSelected})
+      }
     })
 
     Mousetrap.bind('left', () => {
@@ -145,7 +156,6 @@ class Document extends Component {
           finalHtml += text
           if(context.state.selected === i-1 && text.match(/^\s+$/) === null){
             context.selectedText = text
-            console.log("Text = ",text)
           }
       },
       onclosetag: function(name){
@@ -154,7 +164,6 @@ class Document extends Component {
   }, {decodeEntities: true});
   parser.write(htmlTemplate);
   parser.end();
-  //console.log("elements:", context.elements)
   this.maxElements = i
 
 

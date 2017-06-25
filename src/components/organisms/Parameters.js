@@ -3,6 +3,7 @@ import DisabilityList from "../molecules/DisabilityList"
 import SizeList from "../molecules/SizeList"
 import FontList from "../molecules/FontList"
 import PaletteList from "../molecules/PaletteList"
+import VoiceList from "../molecules/VoiceList"
 
 
 class Parameters extends Component {
@@ -27,6 +28,7 @@ class Parameters extends Component {
           <FontList />
         </div>
         <PaletteList />
+        <VoiceList setSelectedVoice={this.props.setSelectedVoice}/>
       </div>
     );
   }

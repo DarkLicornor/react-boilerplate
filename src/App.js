@@ -3,6 +3,7 @@ import MenuTop             from "./components/organisms/MenuTop"
 import MenuLeft             from "./components/organisms/MenuLeft"
 import MenuRight             from "./components/organisms/MenuRight"
 import Parameters             from "./components/organisms/Parameters"
+import Document             from "./components/organism/Document"
 
 import './style/index.css';
 
@@ -37,6 +38,7 @@ class App extends Component {
          ? <Parameters />
          : null
        }
+          <Document />
       </div>
     );
   }

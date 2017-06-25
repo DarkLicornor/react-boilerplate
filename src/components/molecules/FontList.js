@@ -23,8 +23,8 @@ class FontList extends Component {
       <div className="FontList">
       <p>Police</p>
         <select name="fonts" onChange={this.newSelection}>
-        {array.map((font) => {
-          return <option value={font}>{font}</option>
+        {array.map((font, key) => {
+          return <option key={key} value={font}>{font}</option>
         })}
         </select>
       </div>

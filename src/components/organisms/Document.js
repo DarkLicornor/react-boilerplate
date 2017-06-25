@@ -141,23 +141,28 @@ class Document extends Component {
     let i = 0
     this.initElements()
 
+    let cursorTag
     let context = this
     //Generate the page HTML, and store the cursor as well as the current selected text
     var parser = new htmlparser.Parser({
       onopentag: function(name, attribs){
-          if(name in context.elements && name !== "ul" && name !== "ol"){
-            context.elements[name].push(i)
+        cursorTag = name
+        if(name in context.elements && name !== "ul" && name !== "ol"){
+          context.elements[name].push(i)
 
-            finalHtml += "<"+name
-            if(context.state.selected === i && name !== "ul" && name !== "ol" ){
-              finalHtml += ' style="color: red" '
-              context.typeSelected = name
-            }
-            finalHtml += ">"
-            i++
+          finalHtml += "<"+name
+          if(context.state.selected === i && name !== "ul" && name !== "ol" ){
+            finalHtml += ' style="color: red" '
+            context.typeSelected = name
           }
+          finalHtml += ">"
+          i++
+        }
       },
       ontext: function(text){
+        if(["h1", "h2", "h3", "h4", "h5"].indexOf(cursorTag) > -1){
+          context.props.pushToTOC({type: cursorTag, text: text})
+        }
         if(i > 0){
           finalHtml += text
           if(context.state.selected === i-1 && text.match(/^\s+$/) === null){

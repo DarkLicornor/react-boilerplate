@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import DisabilityList from "../molecules/DisabilityList"
 import SizeList from "../molecules/SizeList"
+import FontList from "../molecules/FontList"
+
 
 class Parameters extends Component {
   constructor(props){
@@ -21,6 +23,7 @@ class Parameters extends Component {
         <DisabilityList />
         <div className="Online">
           <SizeList />
+          <FontList />
         </div>
       </div>
     );

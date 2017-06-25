@@ -5,24 +5,31 @@ class FontList extends Component {
     super(props);
     this.state = {
       loading: true,
-      list: ['Basique', 'Bichromate sans bleu','Bichromate sans rouge',
-      'Bichromate sans vert','Monochromate avec bleu','Monochromate avec vert',
-      'Monochromate avec rouge','Non voyant','Dyslexique'],
-      selected: 0,
+      selected: "Times New Roman",
     }
+    this.changeFont = this.changeFont.bind(this)
   }
 
   componentDidMount(){
       this.setState({ loading: false})
   }
 
+  changeFont(e) {
+    this.setState({selected: e.target.value})
+    console.log('val', e.target.value)
+    let elts = document.getElementsByTagName("body");
+    console.log(elts)　　　
+      for (let i = 0; i < elts.length; i++) {　　　　
+      elts[i].style.fontFamily = e.target.value;　　　　
+   }
+  }
 
   render() {
     let array = ["Times New Roman", "Roboto","Arial","monospace" ,"sans-serif" ,"serif"]
     return (
       <div className="FontList">
       <p>Police</p>
-        <select name="fonts" onChange={this.newSelection}>
+        <select style={{fontFamily: this.state.selected}} name="fonts" onChange={(e) => this.changeFont(e)}>
         {array.map((font, key) => {
           return <option style={{fontFamily: font}} key={key} value={font}>{font}</option>
         })}

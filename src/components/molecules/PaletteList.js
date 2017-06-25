@@ -25,7 +25,6 @@ class PaletteList extends Component {
       <div className="PaletteTop">
         <p>Choisir sa palette</p>
         <div className="PaletteList">
-          {console.log("active", this.state.active)}
           {this.state.active === 1
             ? <div className="Palette Active" onClick={() => this.toggleActive(1)}>
               <div style={{width: "4em", height: "4em", background: '#4b85ea'}}></div>

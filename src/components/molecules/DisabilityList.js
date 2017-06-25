@@ -26,7 +26,6 @@ class DisabilityList extends Component {
         <p>Accomodations prédéfinies</p>
         <select name="disabilities" onChange={this.newSelection}>
         {this.state.list.map((disability, key) => {
-        console.log("dis:", disability, key)
         return key === this.state.selected
             ? <option key={key} value={disability} defaultValue>{disability}</option>
             : <option key={key} value={disability} >{disability}</option>

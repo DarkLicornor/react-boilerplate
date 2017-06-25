@@ -14,7 +14,6 @@ class MenuLeft extends Component {
   }
 
   render() {
-    console.log("left")
     return (
       <div className="MenuLeft">
         <h1>Titre</h1>

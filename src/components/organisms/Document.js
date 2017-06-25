@@ -158,10 +158,12 @@ class Document extends Component {
           }
       },
       ontext: function(text){
+        if(i > 0){
           finalHtml += text
           if(context.state.selected === i-1 && text.match(/^\s+$/) === null){
             context.selectedText = text
           }
+        }
       },
       onclosetag: function(name){
           finalHtml += "</"+name+">"
@@ -169,9 +171,12 @@ class Document extends Component {
   }, {decodeEntities: true});
   parser.write(htmlTemplate);
   parser.end();
+
+  finalHtml = finalHtml.replace("undefined", "");
+
   this.maxElements = i
 
-    return <div>{ ReactHtmlParser(finalHtml) }</div>;
+    return <div className="Document">{ ReactHtmlParser(finalHtml) }</div>;
   }
 }
 

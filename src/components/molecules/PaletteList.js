@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-import 'react-color-picker/index.css'
 
 class PaletteList extends Component {
   constructor(props){

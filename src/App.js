@@ -4,12 +4,14 @@ import MenuLeft             from "./components/organisms/MenuLeft"
 import MenuRight             from "./components/organisms/MenuRight"
 import Parameters             from "./components/organisms/Parameters"
 import Document             from "./components/organisms/Document"
+import Mousetrap            from 'mousetrap'
 
 import './style/index.css';
 
 class App extends Component {
   constructor(props){
     super(props);
+    this.selectedVoice = undefined
     this.state = {
       loading: true,
       displayedParameters: false,
@@ -19,16 +21,24 @@ class App extends Component {
 
   componentDidMount(){
       this.setState({ loading: false })
-      window.addEventListener("keydown", function(e) {
-            // space and arrow keys
-        if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-            e.preventDefault();
-        }
-    }, false);
+    //   window.addEventListener("keydown", function(e) {
+    //         // space and arrow keys
+    //     if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+    //         e.preventDefault();
+    //     }
+    // }, false);
+    //Shortcut for menu
+    Mousetrap.bind('escape', () => {
+      this.showParameters()
+    })
   }
 
   showParameters(){
     this.setState({displayedParameters: !this.state.displayedParameters})
+  }
+
+  setSelectedVoice(e){
+    this.selectedVoice = e.target.value
   }
 
   render() {
@@ -37,12 +47,12 @@ class App extends Component {
         <MenuTop showParameters={this.showParameters} />
         <div className="Container">
           <MenuLeft />
-          <Document />
+          <Document selectedVoice={this.selectedVoice}/> 
           <MenuRight />
         </div>
         {this.state.displayedParameters ? <div onClick={this.showParameters} className="HiddenApp"></div> : null}
        {this.state.displayedParameters
-         ? <Parameters />
+         ? <Parameters setSelectedVoice={this.setSelectedVoice.bind(this)}/>
          : null
        }
       </div>

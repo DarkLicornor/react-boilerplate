@@ -11,6 +11,8 @@ class Document extends Component {
     this.typeSelected = ""
     this.initElements()
     this.maxElements = 0
+    this.selectedText = ""
+    this.synth = ""
     this.state = {
       loading: true,
       json: jsonPage,
@@ -20,24 +22,71 @@ class Document extends Component {
     }
   }
 
+  getSelectedText(){
+    return this.selectedText
+  }
+
+  getSelectedVoice(){
+    console.log("InGEtSelectedVoice", this.props.selectedVoice)
+    let voices = []
+    voices = this.synth.getVoices();
+    let result = ""
+    var selectedOption = this.props.selectedVoice;
+    for(let i = 0; i < voices.length ; i++) {
+      if(voices[i].name === selectedOption) {
+        result = voices[i]
+      }
+    }
+    return result;
+  }
+
+  speak(){
+    var utterThis = new SpeechSynthesisUtterance(this.selectedText);
+
+    utterThis.voice = this.getSelectedVoice()
+    utterThis.pitch = 1
+    utterThis.rate = 1
+    this.synth.speak(utterThis)
+
+    utterThis.onpause = function(event) {
+     var char = event.utterance.text.charAt(event.charIndex);
+     console.log('Speech paused at character ' + event.charIndex + ' of "' +
+     event.utterance.text + '", which is "' + char + '".');
+    }
+  }
+
   componentDidMount(){
+    //Set all the key listenners
     let context = this
-    Mousetrap.bind('right', () => { context.setState({selected: context.state.selected + 1}); console.log(context.state.selected) })
-    Mousetrap.bind('up', () => { context.setState({selected: context.state.selected - 1}); console.log(context.state.selected) })
-    Mousetrap.bind('spacebar', function() { console.log('spacebar'); })
+    this.synth = window.speechSynthesis
+
+    Mousetrap.bind('right', () => {
+      if(context.state.selected+1 > 0){
+        context.setState({selected: context.state.selected + 1})
+      }
+    })
+    Mousetrap.bind('up', () => {
+      if(context.state.selected-1 > 0){
+        context.setState({selected: context.state.selected - 1})
+      }
+    })
+    Mousetrap.bind('a', () => {
+      context.speak()
+    })
 
     Mousetrap.bind('down', () => {
-      let currentSelected = this.maxElements
+      console.log("down")
+      let currentSelected = context.maxElements
       let priorityOrder = ["h1", "h2", "h3", "h4", "h5", "p", "li"]
       //On cherche la balise equivalente ou au dessus en priorite
       //On parcours les balises avec un plus grande priorite
       for(let i=priorityOrder.indexOf(context.typeSelected); i > 0 ;i--){
         //On parcours les elements de la liste pour trouver le prochain
         let found = false
-        for(let j=0;j<this.elements[priorityOrder[i]].length;j++){
+        for(let j=0;j<context.elements[priorityOrder[i]].length;j++){
           //On compare si il est plus proche que la balise trouvee precedement
           let currentElement = context.elements[priorityOrder[i]][j]
-          if(currentElement > context.state.selected && found == false){
+          if(currentElement > context.state.selected && found === false){
             found = true
             if(currentSelected > currentElement){
               currentSelected = currentElement
@@ -45,7 +94,9 @@ class Document extends Component {
           }
         }
       }
-      this.setState({selected: currentSelected})
+      if(currentSelected < context.maxElements){
+        this.setState({selected: currentSelected})
+      }
     })
 
     Mousetrap.bind('left', () => {
@@ -56,11 +107,10 @@ class Document extends Component {
       for(let i=priorityOrder.indexOf(context.typeSelected)-1; i > 0 ;i--){
         //On parcours les elements de la liste pour trouver le prochain
         let found = false
-        console.log("tag", priorityOrder[i], "list",this.elements[priorityOrder[i]])
         for(let j=this.elements[priorityOrder[i]].length-1;j >= 0;j--){
           //On compare si il est plus proche que la balise trouvee precedement
           let currentElement = context.elements[priorityOrder[i]][j]
-          if(currentElement < context.state.selected && found == false){
+          if(currentElement < context.state.selected && found === false){
             found = true
             if(currentSelected < currentElement){
               currentSelected = currentElement
@@ -92,6 +142,7 @@ class Document extends Component {
     this.initElements()
 
     let context = this
+    //Generate the page HTML, and store the cursor as well as the current selected text
     var parser = new htmlparser.Parser({
       onopentag: function(name, attribs){
           if(name in context.elements && name !== "ul" && name !== "ol"){
@@ -108,6 +159,9 @@ class Document extends Component {
       },
       ontext: function(text){
           finalHtml += text
+          if(context.state.selected === i-1 && text.match(/^\s+$/) === null){
+            context.selectedText = text
+          }
       },
       onclosetag: function(name){
           finalHtml += "</"+name+">"
@@ -115,11 +169,9 @@ class Document extends Component {
   }, {decodeEntities: true});
   parser.write(htmlTemplate);
   parser.end();
-  //console.log("elements:", context.elements)
   this.maxElements = i
 
-
-    return <div className="Document">{ ReactHtmlParser(finalHtml) }</div>;
+    return <div>{ ReactHtmlParser(finalHtml) }</div>;
   }
 }
 

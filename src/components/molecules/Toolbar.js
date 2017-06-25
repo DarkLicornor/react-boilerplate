@@ -1,8 +1,6 @@
 import share from "../../../public/share.svg"
 import React, { Component } from 'react';
 import edit from "../../../public/edit.svg"
-import left from "../../../public/left.svg"
-import right from "../../../public/right.svg"
 
 
 class Toolbar extends Component {

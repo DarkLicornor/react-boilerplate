@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DisabilityList from "../molecules/DisabilityList"
+import SizeList from "../molecules/SizeList"
 
 class Parameters extends Component {
   constructor(props){
@@ -18,6 +19,9 @@ class Parameters extends Component {
       <div className="Parameters">
         <h1> Préférences </h1>
         <DisabilityList />
+        <div className="Online">
+          <SizeList />
+        </div>
       </div>
     );
   }

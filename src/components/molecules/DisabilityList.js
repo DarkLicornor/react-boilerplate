@@ -1,9 +1,4 @@
 import React, { Component } from 'react';
-import settings from "../../../public/settings.svg"
-import zoomIn from "../../../public/zoom-in.svg"
-import zoomOut from "../../../public/zoom-out.svg"
-import stop from "../../../public/stop-button.svg"
-import play from "../../../public/play-button.svg"
 
 class DisabilityList extends Component {
   constructor(props){
@@ -28,9 +23,13 @@ class DisabilityList extends Component {
   render() {
     return (
       <div className="DisabilityList">
+        <p>Accomodations prédéfinies</p>
         <select name="disabilities" onChange={this.newSelection}>
-        {this.state.list.map((disability) => {
-          console.log("dis:", disability)
+        {this.state.list.map((disability, key) => {
+        console.log("dis:", disability, key)
+        return key === this.state.selected
+            ? <option key={key} value={disability} defaultValue>{disability}</option>
+            : <option key={key} value={disability} >{disability}</option>
         })}
         </select>
       </div>

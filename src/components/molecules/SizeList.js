@@ -17,39 +17,38 @@ class SizeList extends Component {
   }
 
   changeSize(e){
-    console.log('val', e.target.value)
-    let paragraphs = document.getElementsByTagName("p");　　　　
+    let paragraphs = document.getElementsByTagName("body");　　　　
       for (let i = 0; i < paragraphs.length; i++) {　　　　
       paragraphs[i].style.fontSize = e.target.value + "px";　　　　
    }
 
-  paragraphs = document.getElementsByTagName("h1");　　　　
-     for (let i = 0; i < paragraphs.length; i++) {　　　　
-     paragraphs[i].style.fontSize = (parseInt(e.target.value)+15) + "px";　　　　
-  }
+    paragraphs = document.getElementsByTagName("h1");　　　　
+       for (let i = 0; i < paragraphs.length; i++) {　　　　
+       paragraphs[i].style.fontSize = (parseInt(e.target.value, 10)+15) + "px";　　　　
+    }
 
     paragraphs = document.getElementsByTagName("h2");　　　　
       for (let i = 0; i < paragraphs.length; i++) {　　　　
-      paragraphs[i].style.fontSize = (parseInt(e.target.value)+12) + "px";　　　　
+      paragraphs[i].style.fontSize = (parseInt(e.target.value, 10)+12) + "px";　　　　
    }
 
   paragraphs = document.getElementsByTagName("h3");　　　　
      for (let i = 0; i < paragraphs.length; i++) {　　　　
-     paragraphs[i].style.fontSize = (parseInt(e.target.value)+9) + "px";　　　　
+     paragraphs[i].style.fontSize = (parseInt(e.target.value, 10)+9) + "px";　　　　
   }
 
   paragraphs = document.getElementsByTagName("h4");　　　　
     for (let i = 0; i < paragraphs.length; i++) {　　　　
-    paragraphs[i].style.fontSize = (parseInt(e.target.value)+7) + "px";　　　　
+    paragraphs[i].style.fontSize = (parseInt(e.target.value, 10)+7) + "px";　　　　
    }
   paragraphs = document.getElementsByTagName("h5");　　　　
     for (let i = 0; i < paragraphs.length; i++) {　　　　
-    paragraphs[i].style.fontSize = (parseInt(e.target.value)+5) + "px";　　　　
+    paragraphs[i].style.fontSize = (parseInt(e.target.value, 10)+5) + "px";　　　　
    }
 
   paragraphs = document.getElementsByTagName("h6");　　　　
      for (let i = 0; i < paragraphs.length; i++) {　　　　
-     paragraphs[i].style.fontSize = (parseInt(e.target.value)+3) + "px";　　　　
+     paragraphs[i].style.fontSize = (parseInt(e.target.value, 10)+3) + "px";　　　　
   }
 
   }

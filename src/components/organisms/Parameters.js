@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DisabilityList from "../molecules/DisabilityList"
 import SizeList from "../molecules/SizeList"
 import FontList from "../molecules/FontList"
+import PaletteList from "../molecules/PaletteList"
 
 
 class Parameters extends Component {
@@ -25,6 +26,7 @@ class Parameters extends Component {
           <SizeList />
           <FontList />
         </div>
+        <PaletteList />
       </div>
     );
   }

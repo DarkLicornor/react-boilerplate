@@ -10,9 +10,12 @@ class MenuTop extends Component {
     super(props);
     this.state = {
       loading: true,
-      voice: false
+      voice: false,
+      actualZoom: 100,
     }
     this.toggleVoice = this.toggleVoice.bind(this)
+    this.zoomIn = this.zoomIn.bind(this)
+    this.zoomOut = this.zoomOut.bind(this)
   }
 
   componentDidMount(){
@@ -21,6 +24,16 @@ class MenuTop extends Component {
 
   toggleVoice() {
     this.setState({ voice: !this.state.voice})
+  }
+
+  zoomIn() {
+    document.body.style.zoom = (this.state.actualZoom +10 ).toString() + "%"
+    this.setState({actualZoom: this.state.actualZoom + 10})
+  }
+
+  zoomOut() {
+    document.body.style.zoom = (this.state.actualZoom -10).toString() + "%"
+    this.setState({actualZoom: this.state.actualZoom - 10})
   }
 
   render() {
@@ -32,8 +45,8 @@ class MenuTop extends Component {
           : <img onClick={this.toggleVoice} src={stop} alt="Arrêter la voie de synthèse (touche espace)"/>
         }
         <div className="Zoom">
-          <img src={zoomIn} alt="Agrandir le document (touche +)"/>
-          <img src={zoomOut} alt="Réduire le document (touche -)"/>
+          <img src={zoomIn} onClick={this.zoomIn} alt="Agrandir le document (touche +)"/>
+          <img src={zoomOut} onClick={this.zoomOut} alt="Réduire le document (touche -)"/>
         </div>
       </div>
     );

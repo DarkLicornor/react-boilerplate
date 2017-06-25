@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Sizelist extends Component {
+class SizeList extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -8,32 +8,68 @@ class Sizelist extends Component {
       list: ['Basique', 'Bichromate sans bleu','Bichromate sans rouge',
       'Bichromate sans vert','Monochromate avec bleu','Monochromate avec vert',
       'Monochromate avec rouge','Non voyant','Dyslexique'],
-      selected: 0,
     }
+    this.changeSize = this.changeSize.bind(this)
   }
 
   componentDidMount(){
       this.setState({ loading: false})
   }
 
+  changeSize(e){
+    console.log('val', e.target.value)
+    let paragraphs = document.getElementsByTagName("p");　　　　
+      for (let i = 0; i < paragraphs.length; i++) {　　　　
+      paragraphs[i].style.fontSize = e.target.value + "px";　　　　
+   }
+
+  paragraphs = document.getElementsByTagName("h1");　　　　
+     for (let i = 0; i < paragraphs.length; i++) {　　　　
+     paragraphs[i].style.fontSize = (parseInt(e.target.value)+15) + "px";　　　　
+  }
+
+    paragraphs = document.getElementsByTagName("h2");　　　　
+      for (let i = 0; i < paragraphs.length; i++) {　　　　
+      paragraphs[i].style.fontSize = (parseInt(e.target.value)+12) + "px";　　　　
+   }
+
+  paragraphs = document.getElementsByTagName("h3");　　　　
+     for (let i = 0; i < paragraphs.length; i++) {　　　　
+     paragraphs[i].style.fontSize = (parseInt(e.target.value)+9) + "px";　　　　
+  }
+
+  paragraphs = document.getElementsByTagName("h4");　　　　
+    for (let i = 0; i < paragraphs.length; i++) {　　　　
+    paragraphs[i].style.fontSize = (parseInt(e.target.value)+7) + "px";　　　　
+   }
+  paragraphs = document.getElementsByTagName("h5");　　　　
+    for (let i = 0; i < paragraphs.length; i++) {　　　　
+    paragraphs[i].style.fontSize = (parseInt(e.target.value)+5) + "px";　　　　
+   }
+
+  paragraphs = document.getElementsByTagName("h6");　　　　
+     for (let i = 0; i < paragraphs.length; i++) {　　　　
+     paragraphs[i].style.fontSize = (parseInt(e.target.value)+3) + "px";　　　　
+  }
+
+  }
+
   render() {
     let array = []
     for (let i = 12; i<=50; i++) {
       array.push(i)
-      i = i+4
     }
     return (
-      <div className="Sizelist">
+      <div className="SizeList">
         <p>Taille</p>
-        <select name="sizes" onChange={this.newSelection}>
-        {array.map((i) => {
-          return <option value={i}>{i}</option>
+        <select name="sizes" onChange={(e) => this.changeSize(e)}>
+        {array.map((i, key) => {
+          return <option key={key} value={i}>{i}</option>
         })}
-
         </select>
       </div>
     );
   }
 }
 
-export default Sizelist;
+export default SizeList;

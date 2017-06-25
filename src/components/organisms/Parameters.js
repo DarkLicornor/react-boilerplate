@@ -11,23 +11,29 @@ class Parameters extends Component {
     super(props);
     this.state = {
       loading: true,
+      disease: "Basique"
     }
+    this.onChange = this.onChange.bind(this)
   }
 
   componentDidMount(){
       this.setState({ loading: false })
   }
 
+  onChange(e){
+    this.setState({disease: e.target.value})
+  }
+
   render() {
     return (
       <div className="Parameters">
         <h1> Préférences </h1>
-        <DisabilityList />
+        <DisabilityList onChange={this.onChange} />
         <div className="Online">
-          <SizeList />
-          <FontList />
+          <SizeList disease={this.state.disease}/>
+          <FontList disease={this.state.disease}/>
         </div>
-        <PaletteList />
+        <PaletteList disease={this.state.disease}/>
         <VoiceList setSelectedVoice={this.props.setSelectedVoice}/>
       </div>
     );

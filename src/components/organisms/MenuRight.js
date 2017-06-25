@@ -17,7 +17,7 @@ class MenuRight extends Component {
 
   render() {
     return (
-      <div className="MenuRight">
+      <div id="MenuRight">
         <Arrows />
         <Toolbar />
       </div>

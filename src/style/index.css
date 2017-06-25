@@ -1,4 +1,4 @@
-.MenuTop {
+#MenuTop {
   top: 0;
   display: flex;
   flex-direction: row;
@@ -6,9 +6,9 @@
   justify-content: space-between;
   padding: 2em;
   padding-top: 0em;
-  background: #17b8db; }
+  background: #1fa8e2; }
 
-.MenuTop img {
+#MenuTop img {
   width: 5em;
   cursor: pointer; }
 
@@ -16,9 +16,9 @@
   display: flex;
   flex-direction: row; }
 
-.MenuLeft {
+#MenuLeft {
   width: 15vw;
-  background: #dddddd;
+  background: #d3d3d3;
   height: 100%;
   padding: 0.5em;
   position: fixed;
@@ -32,7 +32,7 @@
 
 .Parameters {
   background: white;
-  position: absolute;
+  position: fixed;
   z-index: 5;
   padding: 2em;
   width: 50%;
@@ -47,9 +47,9 @@
   align-items: center;
   justify-content: space-around; }
 
-.MenuRight {
+#MenuRight {
   width: 15vw;
-  background: #dddddd;
+  background: #d3d3d3;
   height: 100%;
   padding: 0.5em;
   position: fixed;
@@ -68,6 +68,9 @@
   margin-right: 17vw;
   margin-left: 17vw;
   padding: 1em; }
+
+.Document #selected {
+  color: #4b85ea; }
 
 .Arrows img {
   width: 4em;
@@ -131,7 +134,7 @@ body {
   font-family: sans-serif; }
 
 .HiddenApp {
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
   height: 100%;

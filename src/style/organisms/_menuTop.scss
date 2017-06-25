@@ -1,6 +1,6 @@
 @import "../variables.scss";
 
-.MenuTop {
+#MenuTop {
   top: 0;
   display: flex;
   flex-direction: row;
@@ -11,7 +11,7 @@
   background: $primaryColor;
 }
 
-.MenuTop img {
+#MenuTop img {
   width: 5em;
   cursor: pointer;
 }

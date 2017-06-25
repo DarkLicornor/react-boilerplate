@@ -1,8 +1,16 @@
 @import "../variables.scss";
 
 .MenuLeft {
-  width: 20%;
+  width:15vw;
   background: $secundaryColor;
   height: 100%;
-  padding: 1em;
+  padding:0.5em;
+  position: fixed;
+  top:0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
 }

@@ -16,9 +16,7 @@ class FontList extends Component {
 
   changeFont(e) {
     this.setState({selected: e.target.value})
-    console.log('val', e.target.value)
     let elts = document.getElementsByTagName("body");
-    console.log(elts)　　　
       for (let i = 0; i < elts.length; i++) {　　　　
       elts[i].style.fontFamily = e.target.value;　　　　
    }

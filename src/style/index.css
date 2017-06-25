@@ -17,10 +17,18 @@
   flex-direction: row; }
 
 .MenuLeft {
-  width: 20%;
+  width: 15vw;
   background: #dddddd;
   height: 100%;
-  padding: 1em; }
+  padding: 0.5em;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: -1; }
 
 .Parameters {
   background: white;
@@ -40,8 +48,25 @@
   justify-content: space-around; }
 
 .MenuRight {
+  width: 15vw;
   background: #dddddd;
   height: 100%;
+  padding: 0.5em;
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 5em;
+  z-index: -1; }
+
+.Document {
+  width: 90vw;
+  height: 100%;
+  margin-right: 17vw;
+  margin-left: 17vw;
   padding: 1em; }
 
 .Arrows img {
@@ -117,7 +142,7 @@ body {
 .Container {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   height: 100%; }
 

@@ -2,6 +2,7 @@
 @import "./organisms/menuLeft";
 @import "./organisms/parameters";
 @import "./organisms/menuRight";
+@import "./organisms/document";
 @import "./molecules/arrows";
 @import "./molecules/toolbar";
 @import "./molecules/disabilityList";
@@ -34,7 +35,7 @@ body {
 .Container {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   height: 100%;
 }

@@ -17,11 +17,11 @@ class SizeList extends Component {
   }
 
   changeSize(e){
-    let paragraphs = document.getElementsByTagName("body");　　　　
+    let paragraphs = document.getElementsByTagName("p", "ol", "ul", "li", "td", "a");　　　　
       for (let i = 0; i < paragraphs.length; i++) {　　　　
       paragraphs[i].style.fontSize = e.target.value + "px";　　　　
    }
-
+   
     paragraphs = document.getElementsByTagName("h1");　　　　
        for (let i = 0; i < paragraphs.length; i++) {　　　　
        paragraphs[i].style.fontSize = (parseInt(e.target.value, 10)+15) + "px";　　　　

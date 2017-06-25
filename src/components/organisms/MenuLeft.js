@@ -26,7 +26,7 @@ class MenuLeft extends Component {
 
   render() {
     return (
-      <div className="MenuLeft">
+      <div id="MenuLeft">
         { ReactHtmlParser(this.generateTOC()) }
       </div>
     );

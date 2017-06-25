@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import CodeFest             from "./components/CodeFest/CodeFest"
+import Document             from "./components/organism/Document"
 
-import './App.css';
+import './style/index.css';
 
 class App extends Component {
   constructor(props){
@@ -18,7 +18,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <CodeFest />
+          <Document />
       </div>
     );
   }
